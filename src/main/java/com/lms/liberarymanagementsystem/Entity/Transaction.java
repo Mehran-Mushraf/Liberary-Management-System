@@ -1,40 +1,36 @@
 package com.lms.liberarymanagementsystem.Entity;
 
+import com.lms.liberarymanagementsystem.Enum.TransactionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-public class Book {
-
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
-    private String title;
-    private int price;
-
+    private String transationNumber;
     @Enumerated(EnumType.STRING)
-    private Genre genre;
+    TransactionStatus transactionStatus;
 
-    private boolean isIssued;
+    @CreatedDate
+    private Date transationDate;
+
+    private boolean isIssueOperation;
 
     @ManyToOne
     @JoinColumn
-//    @JsonIgnore
-    Author author;
-
-    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
-    List<Transaction> transactions = new ArrayList<>();
+    Book book;
 
     @ManyToOne
     @JoinColumn
