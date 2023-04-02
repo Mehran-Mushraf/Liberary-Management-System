@@ -27,6 +27,7 @@ public class Transaction {
     private Date transationDate;
 
     private boolean isIssueOperation;
+    private String message;
 
     @ManyToOne
     @JoinColumn
